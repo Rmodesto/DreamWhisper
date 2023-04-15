@@ -1,0 +1,25 @@
+dream-whisper
+ - .next
+ - components
+ - layouts
+      -HeaderSideBar.ts
+      -Footer.tsx
+      -Layout.tsx
+ - pages
+    -api
+       -_app.tsx
+         -_document.tsx
+            -index.tsx
+            -search.tsx
+ - public
+ - src
+ - styles
+ -connnectToDatabase.connnectToDatabase
+-next.config.js
+-package.json
+-package-lock.json
+-tailwind.config.js
+-postcss.config.js
+-.env
+-.gitignore
+-tsconfig.json
