@@ -1,34 +1,34 @@
-import Post, { IPost } from "./postSchema";
-import User, { IUser } from "./userSchema";
+// userSchema.ts
+import { Document, model, Schema } from 'mongoose';
 
-const connectionString = "mongodb://localhost:27017/my_database";
 
-connect(connectionString, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-})
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((error) => console.error("Error connecting to MongoDB:", error));
+export interface IUser extends Document {
+  email: string;
+  firstName: string;
+  lastName: string;
+  dob: Date;
+}
 
-// Create a new user
-const newUser: IUser = new User({
-  email: "test@example.com",
-  firstName: "John",
-  lastName: "Doe",
-  dob: new Date("2000-01-01"),
+const userSchema = new Schema<IUser>({
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  dob: {
+    type: Date,
+    required: true,
+  },
 });
 
-newUser.save().then((savedUser) => {
-  console.log("User saved:", savedUser);
+const User = model<IUser>('User', userSchema);
 
-  // Create a new post associated with the user
-  const newPost: IPost = new Post({
-    userId: savedUser._id, // Use the user's _id field as the userId for the post
-    content: "This is a sample post",
-  });
-
-  newPost.save().then((savedPost) => {
-    console.log("Post saved:", savedPost);
-  });
-});
+export default User;

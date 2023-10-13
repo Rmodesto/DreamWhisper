@@ -1,15 +1,17 @@
-import { Document, model, Schema, Types } from "mongoose";
+// postSchema.ts
+import { Document, model, Schema, Types } from 'mongoose';
+import { IUser } from './userSchema'; 
 
 export interface IPost extends Document {
-  userId: Types.ObjectId;
+  user: IUser['_id'];
   content: string;
   createdAt: Date;
 }
 
 const postSchema = new Schema<IPost>({
-  userId: {
+  user: {
     type: Types.ObjectId,
-    ref: "User", // This should match the name of the 'User' model in userSchema.ts
+    ref: 'User',
     required: true,
   },
   content: {
@@ -22,6 +24,6 @@ const postSchema = new Schema<IPost>({
   },
 });
 
-const Post = model<IPost>("Post", postSchema);
+const Post = model<IPost>('Post', postSchema);
 
 export default Post;

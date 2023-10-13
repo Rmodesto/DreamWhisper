@@ -10,6 +10,7 @@ if (!uri) {
 let cachedDb: Db | null = null;
 
 export async function connectToDatabase() {
+  console.log("Using cached database instance."); // Log when using cached connection
   if (cachedDb) {
     return cachedDb;
   }
@@ -19,6 +20,8 @@ export async function connectToDatabase() {
   } as any);
   const db = client.db(dbName);
   cachedDb = db;
+
+  console.log("Successfully connected to MongoDB."); // Log after a successful connection
 
   return db; // Add this line to return the connected database
 }

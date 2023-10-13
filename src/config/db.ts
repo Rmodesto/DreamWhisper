@@ -4,11 +4,7 @@ dotenv.config();
 
 export async function connectDB(): Promise<Mongoose | void> {
   try {
-    const connection = await connect(process.env.MONGODB_URI as string, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-    });
+    const connection = await connect(process.env.MONGODB_URI as string);
     console.log("Connected to MongoDB Atlas");
     return connection;
   } catch (error: unknown) {
@@ -18,3 +14,4 @@ export async function connectDB(): Promise<Mongoose | void> {
     process.exit(1);
   }
 }
+
